@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-config
+  namespace: venus-prod
+data:
+  APP_ENV: "prod"
+  APP_DEBUG: "false"
+  LLM_PROVIDER: "qwen"
+  LLM_QWEN_BASE_URL: "http://llm-service.llm-prod.svc.cluster.local:8080"
+  OSS_ENDPOINT: "https://oss-cn-hangzhou.aliyuncs.com"
+  OSS_INTERNAL_ENDPOINT: "https://oss-cn-hangzhou-internal.aliyuncs.com"
+  OSS_BUCKET: "venus-prod"
+  ALI_SMS_SIGN: "薇分美学"
+  ALI_SMS_TEMPLATE_LOGIN: "SMS_CHANGE_ME"

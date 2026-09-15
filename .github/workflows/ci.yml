@@ -1,0 +1,164 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  api:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: venus
+          MYSQL_USER: venus
+          MYSQL_PASSWORD: pass
+        ports: ["3306:3306"]
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-retries=10
+      redis:
+        image: redis:7-alpine
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd="redis-cli ping"
+          --health-interval=10s
+          --health-retries=10
+    env:
+      DATABASE_URL: mysql+aiomysql://venus:pass@localhost:3306/venus
+      REDIS_URL: redis://localhost:6379/0
+      JWT_SECRET: ci_secret_ci_secret_ci_secret_ci
+      PHONE_DEK_BASE64: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
+      PHONE_HMAC_KEY: ci_hmac_ci_hmac_ci_hmac_ci_hmac_
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+      - name: Install Poetry
+        run: pipx install poetry==1.8.4
+      - name: Install deps
+        working-directory: apps/api
+        run: poetry install
+      - name: Lint
+        working-directory: apps/api
+        run: |
+          poetry run ruff check .
+          poetry run mypy app
+      - name: Migrate
+        working-directory: apps/api
+        run: poetry run alembic upgrade head
+      - name: Test
+        working-directory: apps/api
+        run: poetry run pytest -v --cov=app --cov-fail-under=60
+
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: pnpm }
+      - run: pnpm install --filter=@venus/web --filter=@venus/shared-types
+      - working-directory: apps/web
+        run: |
+          pnpm tsc --noEmit
+          pnpm build
+          # bundle 体积守门：主 JS 文件 < 250KB raw（≈80KB gzip）
+          SIZE=$(stat -c%s dist/assets/index*.js)
+          echo "main bundle: $SIZE bytes"
+          test "$SIZE" -lt 250000
+
+  # 小程序包不进 Docker 镜像（由开发者工具单独上传 mp 后台），所以不挂进
+  # build-push 的 needs，只作为编译守门：改坏了 apps/miniapp 能在 PR 阶段发现，
+  # 而不是等到要发版时才在开发者工具里炸开。
+  miniapp:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: { version: 9 }
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: pnpm }
+      - run: pnpm install --filter=@venus/miniapp
+      - working-directory: apps/miniapp
+        # build:weapp 串了 gen-env + sync-appid + taro build；WX_APPID 留空时
+        # sync-appid 不报错也不改文件，CI 上跑的就是 touristappid，符合预期。
+        run: |
+          pnpm tsc --noEmit
+          pnpm build:weapp
+
+  build-push:
+    if: github.ref == 'refs/heads/main'
+    needs: [api, web]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      # 走 infra/build.sh 而不是直接 docker build，是为了继承它的两件事：
+      # 1) 构建前生成 apps/web/.env.production —— 该文件被 .gitignore 忽略，CI 检出后
+      #    并不存在，漏生成则 config/frontend.env 的改动静默不进镜像（Vite 退回代码里的
+      #    兜底默认值），CI 产物会和本地 build.sh 产物不一致；
+      # 2) 拦截密钥被烤进镜像（build.sh 对 WX_SECRET/JWT_SECRET 等硬校验）。
+      # web 也是镜像（内含 nginx，做 TLS 终止 + 反代 /api），不再 scp dist 到宿主机。
+      - name: Build and push api + web images
+        env:
+          ACR_USERNAME: ${{ secrets.ACR_USER }}
+          ACR_PASSWORD: ${{ secrets.ACR_PASS }}
+          ACR_REPO: ${{ secrets.ACR_REPO }}
+        run: |
+          set -e
+          TAG="$(git rev-parse --short HEAD)"
+          # build.conf 不入库（可能含 ACR 口令），CI 从 ACR_REPO 拆出镜像坐标现生成
+          cat > infra/build.conf <<EOF
+          ACR_REGISTRY=${ACR_REPO%%/*}
+          ACR_NAMESPACE=${ACR_REPO#*/}
+          PLATFORM=linux/amd64
+          EOF
+          bash infra/build.sh --push --tag="$TAG"
+          # deploy 步骤用 :latest，这里只补打 tag，不重新构建
+          for img in api web; do
+            docker tag  "$ACR_REPO/$img:$TAG" "$ACR_REPO/$img:latest"
+            docker push "$ACR_REPO/$img:latest"
+          done
+
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    needs: [build-push]
+    runs-on: ubuntu-latest
+    steps:
+      # 线上拓扑 = infra/docker-compose.ecs.yml：web / api / cron 三个容器，
+      # MySQL/Redis 走阿里云托管服务。web 是镜像，nginx 配置由 edge.conf 挂载。
+      # 服务器上只有 scp 过去的 infra/ 与 config/（见 docs/02-部署实施.md §8），不是 git 工作副本。
+      - name: Roll ECS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            set -e
+            cd /srv/venus-4s/infra
+            export API_IMAGE="${{ secrets.ACR_REPO }}/api:latest"
+            export WEB_IMAGE="${{ secrets.ACR_REPO }}/web:latest"
+            docker compose -f docker-compose.ecs.yml pull
+            # 迁移必须先于 up -d：先起新代码再迁移，新代码会有一段时间打在旧表结构上。
+            # 用 run --rm 起一次性容器，不影响在跑的 api。
+            docker compose -f docker-compose.ecs.yml run --rm api alembic upgrade head
+            # up -d 只重建镜像/配置有变化的容器，没变的原地不动
+            docker compose -f docker-compose.ecs.yml up -d
+            docker compose -f docker-compose.ecs.yml exec -T api curl -sf localhost:8000/health
+
+      # 冒烟从 runner 侧打公网，验证 nginx/TLS/静态站这一层。
+      # 注意不跑 scripts/smoke.sh：它含短信发送用例，打生产会真实消耗短信额度。
+      - name: Public smoke
+        run: |
+          set -e
+          curl -sf "https://${{ secrets.PUBLIC_HOST }}/health" | grep -q '"status":"ok"'
+          curl -sfI "https://${{ secrets.PUBLIC_HOST }}/" | head -1 | grep -q 200

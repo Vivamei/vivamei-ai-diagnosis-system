@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cron
+  namespace: venus-prod
+  labels:
+    app: cron
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: cron
+  template:
+    metadata:
+      labels:
+        app: cron
+    spec:
+      imagePullSecrets:
+        - name: acr-cred
+      containers:
+        - name: cron
+          image: registry.cn-hangzhou.aliyuncs.com/venus/api:REPLACE_ME_SHA
+          command: ["python", "-m", "app.cron"]
+          envFrom:
+            - configMapRef:
+                name: api-config
+            - secretRef:
+                name: api-secret
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "256Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"

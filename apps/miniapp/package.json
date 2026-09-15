@@ -1,0 +1,51 @@
+{
+  "name": "@venus/miniapp",
+  "version": "0.1.0",
+  "private": true,
+  "description": "薇分美学4S 小程序 + H5（Taro）",
+  "templateInfo": {
+    "name": "default",
+    "typescript": true,
+    "css": "none",
+    "framework": "react"
+  },
+  "scripts": {
+    "gen-env": "node ../../scripts/gen-frontend-env.mjs miniapp",
+    "sync-appid": "node scripts/sync-appid.mjs production",
+    "check:review-compliance": "node scripts/check-review-compliance.mjs",
+    "check:weapp-wxss": "node scripts/check-weapp-wxss.mjs",
+    "build:weapp": "npm run gen-env && node scripts/sync-appid.mjs production && taro build --type weapp && npm run check:weapp-wxss",
+    "build:h5": "npm run gen-env && taro build --type h5",
+    "dev:weapp": "npm run gen-env && node scripts/sync-appid.mjs development && taro build --type weapp --watch",
+    "dev:h5": "npm run build:h5 -- --watch"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.24.4",
+    "@tarojs/components": "4.2.1",
+    "@tarojs/helper": "4.2.1",
+    "@tarojs/plugin-framework-react": "4.2.1",
+    "@tarojs/plugin-platform-h5": "4.2.1",
+    "@tarojs/plugin-platform-weapp": "4.2.1",
+    "@tarojs/react": "4.2.1",
+    "@tarojs/router": "4.2.1",
+    "@tarojs/runtime": "4.2.1",
+    "@tarojs/shared": "4.2.1",
+    "@tarojs/taro": "4.2.1",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.4",
+    "@babel/preset-react": "^7.24.7",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
+    "@tarojs/cli": "4.2.1",
+    "@tarojs/taro-loader": "4.2.1",
+    "@tarojs/webpack5-runner": "4.2.1",
+    "@types/react": "^18.3.12",
+    "@types/webpack-env": "^1.18.5",
+    "babel-preset-taro": "4.2.1",
+    "react-refresh": "^0.14.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  }
+}

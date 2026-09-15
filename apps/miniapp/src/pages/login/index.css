@@ -1,0 +1,167 @@
+/* H5 的登录页整页是纯米色底，不带全局那层色晕，这里显式盖掉 app.css 的 page 背景。 */
+.login-page {
+  min-height: 100vh;
+  background: #fbf7f2;
+}
+
+.login-hero {
+  height: 200px;
+  padding: 22px;
+  background: linear-gradient(150deg, #caa97f 0%, #e2a290 55%, #ecb0a0 100%);
+  color: #fff;
+  border-radius: 0 0 30px 30px;
+  box-sizing: border-box;
+}
+
+.login-hero__name {
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: 2px;
+}
+
+.login-hero__sub {
+  font-size: 11px;
+  letter-spacing: 3px;
+  opacity: 0.85;
+  margin-top: 3px;
+}
+
+.login-hero__tip {
+  margin-top: 46px;
+  font-size: 15px;
+  opacity: 0.95;
+}
+
+.login-card {
+  margin: -40px 16px 0;
+  padding: 20px;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(200, 163, 118, 0.16);
+}
+
+.login-label {
+  display: block;
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-bottom: 6px;
+}
+
+.login-input {
+  height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--gold-light);
+  border-radius: 12px;
+  font-size: 15px;
+  background: #fbf7f0;
+  margin-bottom: 12px;
+  box-sizing: border-box;
+}
+
+.login-row {
+  display: flex;
+  align-items: flex-start;
+}
+
+.login-row .login-input {
+  flex: 1;
+  margin-right: 8px;
+}
+
+.login-sendbtn {
+  width: 120px;
+  height: 44px;
+  line-height: 44px;
+  border-radius: 12px;
+  border: 1px solid var(--gold-light);
+  background: #fff;
+  color: var(--gold-deep);
+  font-size: 13px;
+  padding: 0;
+  text-align: center;
+}
+
+.login-sendbtn.is-disabled {
+  background: #f5efe5;
+  color: #bbb;
+}
+
+.login-consent {
+  display: flex;
+  align-items: flex-start;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+}
+
+.login-consent__box {
+  transform: scale(0.8);
+  margin-right: 2px;
+}
+
+.login-phone {
+  margin-top: 16px;
+  background: linear-gradient(135deg, #caa97f, #e2a290);
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  height: 46px;
+  line-height: 46px;
+  font-size: 15px;
+  font-weight: 600;
+  box-shadow: 0 10px 24px rgba(200, 163, 118, 0.36);
+}
+
+.login-phone::after {
+  border: none;
+}
+
+.login-submit {
+  margin-top: 8px;
+  height: 46px;
+  line-height: 46px;
+  border-radius: 24px;
+  border: none;
+  background: linear-gradient(135deg, #caa97f, #e2a290);
+  color: #fff;
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: 0 10px 24px rgba(200, 163, 118, 0.36);
+}
+
+.login-submit[disabled] {
+  background: #e7dccb;
+  box-shadow: none;
+}
+
+.login-switch {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--gold-deep);
+}
+
+.login-skip {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+/* 协议链接：与 H5 一致用金色下划线，和周围灰字拉开可点感 */
+.login-link {
+  color: var(--gold-deep);
+  text-decoration: underline;
+}
+
+.login-err {
+  color: var(--danger);
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.login-foot {
+  margin-top: 24px;
+  padding: 0 24px;
+}

@@ -1,0 +1,37 @@
+{
+  "name": "@venus/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "test": "vitest",
+    "e2e": "playwright test"
+  },
+  "dependencies": {
+    "html2canvas": "^1.4.1",
+    "jspdf": "^2.5.2",
+    "qrcode.react": "^4.1.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^7.0.0",
+    "swr": "^2.2.5"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "vite": "^5.4.10",
+    "typescript": "^5.6.3",
+    "eslint": "^9.14.0",
+    "@playwright/test": "^1.48.2",
+    "vitest": "^2.1.4",
+    "@testing-library/react": "^16.0.1",
+    "@testing-library/jest-dom": "^6.6.3",
+    "openapi-typescript": "^7.4.2",
+    "pica": "^9.0.1"
+  }
+}

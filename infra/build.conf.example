@@ -1,0 +1,31 @@
+# 打镜像用的构建参数。复制成 infra/build.conf 后填写真实值。
+#   cp infra/build.conf.example infra/build.conf
+#   chmod 600 infra/build.conf                     # 如果填了 ACR_PASSWORD 必须锁权限
+# build.conf 默认只含「非密钥」的镜像坐标；若填了下面的 ACR_USERNAME/ACR_PASSWORD，
+# 就变成含口令的文件，必须 chmod 600 + 加入 .gitignore（勿提交仓库）。
+
+# 阿里云 ACR 地址（专有网络或公网域名，控制台「访问凭证」页可见）
+# 例：registry.cn-hangzhou.aliyuncs.com
+ACR_REGISTRY=registry.cn-hangzhou.aliyuncs.com
+
+# ACR 命名空间（在 ACR 控制台创建，镜像会推到 <REGISTRY>/<NAMESPACE>/api|web）
+ACR_NAMESPACE=venus
+
+# 镜像 tag（建议用版本号或日期，别长期用 latest 以便回滚）
+IMAGE_TAG=v1.0.0
+
+# 目标架构（阿里云 ECS 一般是 x86_64 → linux/amd64）
+PLATFORM=linux/amd64
+
+# ---- 以下为可选：非交互式推送 ACR 用 ----
+# 不填 → build.sh --push 时会弹出 docker login 提示，手动输入
+# 填了 → 走 `docker login --password-stdin`，脚本零交互（适合 CI 或本地自动化）
+#
+# 更安全的替代方案：通过环境变量传入，避免密码落盘
+#   export ACR_USERNAME='ops@1234567890123456'
+#   export ACR_PASSWORD='xxx'
+#   bash infra/build.sh --push
+# 优先级：环境变量 > build.conf > 交互式提示
+#
+# ACR_USERNAME=ops@1234567890123456
+# ACR_PASSWORD=

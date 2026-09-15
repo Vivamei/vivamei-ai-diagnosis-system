@@ -1,0 +1,225 @@
+/* 与 apps/web/src/pages/legal/LegalLayout.tsx 的内联样式逐项对齐。 */
+.lg-page {
+  min-height: 100vh;
+  padding: 20px 20px calc(24px + constant(safe-area-inset-bottom));
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+.lg-hero {
+  background: linear-gradient(135deg, #3a342c 0%, #4d443a 100%);
+  border-radius: 18px;
+  padding: 28px 22px 22px;
+  color: #f0e6d5;
+}
+
+.lg-hero__brand {
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--gold-light);
+}
+
+.lg-hero__title {
+  margin-top: 10px;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 4px;
+}
+
+.lg-hero__divider {
+  width: 36px;
+  height: 2px;
+  margin-top: 12px;
+  background: linear-gradient(90deg, var(--gold), var(--rose));
+}
+
+.lg-hero__badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.lg-badge {
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(200, 163, 118, 0.35);
+  background: rgba(200, 163, 118, 0.08);
+  color: var(--gold-light);
+}
+
+.lg-toc,
+.lg-content {
+  margin-top: 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.lg-toc__row {
+  display: flex;
+  align-items: center;
+  padding: 6px 0;
+}
+
+.lg-toc__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin-right: 10px;
+}
+
+.lg-toc__label {
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.lg-sec {
+  margin-bottom: 22px;
+}
+
+.lg-sec__head {
+  display: flex;
+  align-items: baseline;
+}
+
+.lg-sec__index {
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: var(--gold-deep);
+  margin-right: 8px;
+}
+
+.lg-sec__title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.lg-sec__rule {
+  width: 24px;
+  height: 2px;
+  margin: 8px 0 10px;
+  background: var(--gold);
+}
+
+.lg-p {
+  display: block;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--ink);
+}
+
+.lg-b {
+  font-weight: 700;
+}
+
+.lg-list {
+  margin-top: 8px;
+}
+
+.lg-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 6px;
+}
+
+.lg-item__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gold);
+  margin-top: 9px;
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.lg-item__text {
+  flex: 1;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--ink);
+}
+
+.lg-table {
+  margin-top: 10px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.lg-tr {
+  display: flex;
+  border-bottom: 1px solid var(--line);
+}
+
+.lg-tr:last-child {
+  border-bottom: none;
+}
+
+.lg-tr--head {
+  background: var(--bg-soft);
+}
+
+.lg-th,
+.lg-td {
+  flex: 1;
+  padding: 10px 8px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.lg-th {
+  font-weight: 700;
+  color: var(--gold-deep);
+}
+
+.lg-td {
+  color: var(--ink);
+}
+
+.lg-callout {
+  margin-top: 10px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+  line-height: 1.9;
+}
+
+.lg-callout--info {
+  background: rgba(200, 163, 118, 0.08);
+  border: 1px solid rgba(200, 163, 118, 0.35);
+  color: var(--ink);
+}
+
+.lg-callout--warning {
+  background: rgba(232, 176, 79, 0.1);
+  border: 1px solid rgba(232, 176, 79, 0.4);
+  color: var(--ink);
+}
+
+.lg-contact {
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+
+.lg-backwrap {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.lg-back {
+  display: inline-block;
+  height: 40px;
+  line-height: 38px;
+  padding: 0 26px;
+  border-radius: 20px;
+  border: 1px solid var(--gold-light);
+  color: var(--gold-deep);
+  font-size: 14px;
+}

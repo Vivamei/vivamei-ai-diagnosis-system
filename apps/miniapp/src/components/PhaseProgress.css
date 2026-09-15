@@ -1,0 +1,84 @@
+.pp {
+  display: flex;
+  align-items: center;
+  padding: 16px 14px;
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: var(--shadow-soft);
+}
+
+.pp-seg {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+
+.pp-seg--last {
+  flex: 0 0 auto;
+}
+
+.pp-node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 44px;
+  transition: transform 0.3s ease;
+}
+
+/* 当前正在生成的节点整体放大一点，让视线自动落上去 */
+.pp-node--streaming {
+  transform: scale(1.08);
+}
+
+.pp-dot {
+  width: 30px;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 15px;
+  text-align: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  background: #d8ccbb;
+  transition: background 0.4s ease;
+}
+
+.pp-dot--streaming {
+  background: linear-gradient(135deg, #e8d5b3, #c8a376);
+  /* 金色呼吸光晕，关键帧在 app.css */
+  animation: pulseGold 1.5s infinite;
+}
+
+.pp-dot--done {
+  background: linear-gradient(135deg, #a5c8b6, #88b09a);
+}
+
+.pp-label {
+  font-size: 11px;
+  color: var(--ink-light);
+  margin-top: 6px;
+  transition: color 0.3s ease;
+}
+
+.pp-label--active {
+  color: var(--ink-soft);
+}
+
+.pp-label--streaming {
+  font-weight: 600;
+}
+
+.pp-line {
+  flex: 1;
+  height: 2px;
+  margin: 0 6px 22px;
+  border-radius: 1px;
+  background: #eee1cf;
+}
+
+.pp-line--active {
+  /* 深浅各占一半的条纹 + 24px 步进的位移动画 = 线上有东西在往前流 */
+  background: linear-gradient(90deg, #c8a376 0%, #c8a376 50%, #e8d5b3 50%, #e8d5b3 100%);
+  background-size: 24px 100%;
+  animation: flowLine 0.9s linear infinite;
+}

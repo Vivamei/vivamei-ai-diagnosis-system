@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+
+# Node
+node_modules/
+dist/
+.vite/
+*.tsbuildinfo
+playwright-report/
+test-results/
+
+# Editor
+.vscode/
+.idea/
+
+# Env & secrets
+.env
+.env.*
+!.env.example
+# 集中配置：本地实际配置不入库；模板与非敏感基线保留
+config/dev.env
+# 打镜像参数，可能填了 ACR_USERNAME/ACR_PASSWORD（见 infra/build.conf.example）
+infra/build.conf
+infra/nginx/ssl/*
+!infra/nginx/ssl/.gitkeep
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+/build/
+*.log
+
+# 本地产物集散地（问题现场截图 / 历史日志 / 待删垃圾），不入库不打包
+_local/

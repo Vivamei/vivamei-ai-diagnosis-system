@@ -1,0 +1,178 @@
+{
+  "stype": {
+    "dimension_name": "分相 Stype",
+    "primary": "bone",
+    "label": "骨相主导",
+    "primary_label": "骨相主导",
+    "score": 82,
+    "confidence": 0.85,
+    "composition": {
+      "bone": {"label": "骨相", "stars": 5, "max_stars": 5},
+      "flesh": {"label": "肉相", "stars": 3, "max_stars": 5},
+      "skin": {"label": "皮相", "stars": 4, "max_stars": 5}
+    },
+    "description": "整体面部轮廓清晰，下颌线与颧骨支撑感较强，面中部饱满度适中但非主导；皮肤纹理自然，无明显松弛堆积，线条走向更依赖骨骼结构定型。视觉上呈现稳定、耐看的轮廓基础。",
+    "narrative": "整体面部轮廓清晰，下颌线与颧骨支撑感较强，面中部饱满度适中但非主导；皮肤纹理自然，无明显松弛堆积，线条走向更依赖骨骼结构定型。视觉上呈现稳定、耐看的轮廓基础。",
+    "evidence": [
+      "下颌角转折明确，轮廓收束有力",
+      "颧骨高度适中且衔接流畅，未见明显软组织膨隆",
+      "面中部无过度饱满或凹陷，骨性支撑较显著"
+    ]
+  },
+  "style": {
+    "dimension_name": "分型 Style",
+    "primary_type": "wen_wan_zhi_xing",
+    "primary_label": "温婉知性",
+    "label": "温婉知性",
+    "score": 88,
+    "confidence": 0.92,
+    "secondary": [
+      {"type": "qing_li", "label": "清丽型", "weight": 0.28}
+    ],
+    "description": "眼神柔和有神，笑意含蓄自然，眉形舒展不锐利，整体气质沉静而具亲和力；妆容简约、发型利落，强化了知性与从容的表达，辨识度高但不张扬。",
+    "narrative": "眼神柔和有神，笑意含蓄自然，眉形舒展不锐利，整体气质沉静而具亲和力；妆容简约、发型利落，强化了知性与从容的表达，辨识度高但不张扬。",
+    "keywords": ["柔和坚定", "内敛优雅", "自然亲和"]
+  },
+  "subzone": {
+    "dimension_name": "分区 Subzone",
+    "score": 85,
+    "summary": "各分区协调度良好，额部与眉眼过渡自然，中面部饱满度均衡，鼻唇比例适中，下颌轮廓清晰。优势在于整体统一性与表情自然度；可进一步关注眉眼区域的动态表现力与唇周线条的精致延续性。",
+    "zones": [
+      {
+        "code": "forehead",
+        "label": "额部",
+        "zone": "额部",
+        "status": "good",
+        "description": "额头饱满度适中，发际线自然，无明显凹陷或过宽，皮纹轻浅，整体观感清爽",
+        "strength": "比例协调，与眉弓衔接流畅，利于营造开阔感",
+        "optimization": "可适度强化额部光影过渡，提升立体层次感"
+      },
+      {
+        "code": "brow_eye",
+        "label": "眉眼",
+        "zone": "眉眼",
+        "status": "watch",
+        "description": "眉形自然舒展，眼裂适中，眼周皮肤紧致，笑纹呈放射状分布，属温和型动态纹路",
+        "strength": "眼神清澈有神，眼尾轻微上扬，增强亲和力与灵动感",
+        "optimization": "可关注眼周微表情的细腻表达，维持自然状态下的神采"
+      },
+      {
+        "code": "midface",
+        "label": "中面部",
+        "zone": "中面部",
+        "status": "good",
+        "description": "苹果肌位置适中，颧骨支撑清晰，无明显下垂或塌陷，面颊过渡平缓",
+        "strength": "饱满度与轮廓平衡得当，显年轻态而不浮肿",
+        "optimization": "可注重中面部光影管理，突出自然高光区"
+      },
+      {
+        "code": "nose",
+        "label": "鼻部",
+        "zone": "鼻部",
+        "status": "good",
+        "description": "鼻梁高度适中，鼻尖微翘，鼻翼宽度协调，与面部比例匹配良好",
+        "strength": "线条简洁流畅，无突兀转折，增强整体和谐感",
+        "optimization": "可微调鼻唇角角度以强化微笑时的连贯性"
+      },
+      {
+        "code": "lips",
+        "label": "唇部",
+        "zone": "唇部",
+        "status": "good",
+        "description": "唇形饱满匀称，唇峰清晰，唇线自然，唇色健康，微笑时唇形上扬幅度得体",
+        "strength": "唇部动态自然，与眼周表情协同性强",
+        "optimization": "可关注唇周细纹的日常维护，保持柔润质感"
+      },
+      {
+        "code": "jawline",
+        "label": "下颌轮廓",
+        "zone": "下颌轮廓",
+        "status": "good",
+        "description": "下颌线清晰紧致，颏颈角过渡自然，无双下巴或松垂迹象",
+        "strength": "轮廓收束有力，赋予面部稳定感与成熟气质",
+        "optimization": "可加强颈部与下颌交界处的线条连贯性"
+      }
+    ]
+  },
+  "struct": {
+    "dimension_name": "分层 Struct",
+    "score": 80,
+    "summary": "骨骼轮廓层支撑稳固，皮下组织层分布均衡，筋膜层维持较好张力，皮肤层质地细腻但存在轻度光老化痕迹。整体结构层次清晰，具备良好的抗衰基础，建议持续关注表层与中层的协同维护。",
+    "layers": [
+      {
+        "code": "skin",
+        "label": "皮肤层",
+        "layer": "皮肤层",
+        "score": 76,
+        "status": "watch",
+        "description": "肤质细腻，毛孔中等，可见少量细纹与轻度色素沉着，整体光泽度良好",
+        "optimization": "建议加强日常光防护与屏障修护，维持表层健康状态"
+      },
+      {
+        "code": "subcutis",
+        "label": "皮下组织",
+        "layer": "皮下组织",
+        "score": 83,
+        "status": "good",
+        "description": "容量分布均匀，无局部凹陷或堆积，面中部支撑适中，动态表情自然",
+        "optimization": "可关注胶原代谢节奏，维持组织弹性与饱满度平衡"
+      },
+      {
+        "code": "fascia",
+        "label": "筋膜支撑层",
+        "layer": "筋膜支撑层",
+        "score": 81,
+        "status": "good",
+        "description": "轮廓线清晰，无明显移位或松解迹象，笑纹走向符合自然力学路径",
+        "optimization": "建议结合生活方式管理，延缓筋膜层张力变化趋势"
+      },
+      {
+        "code": "bone",
+        "label": "骨骼轮廓层",
+        "layer": "骨骼轮廓层",
+        "score": 88,
+        "status": "good",
+        "description": "颧骨、下颌角、颏部结构清晰，比例协调，构成稳定的面部框架",
+        "optimization": "可强化轮廓光影塑造，突出骨性优势"
+      }
+    ]
+  },
+  "radar": {"stype": 45, "style": 88, "subzone": 38, "struct": 50},
+  "radar_chart": {
+    "labels": ["分相 Stype", "分型 Style", "分区 Subzone", "分层 Struct"],
+    "keys": ["stype", "style", "subzone", "struct"],
+    "values": [45, 88, 38, 50],
+    "state_values": [82, 88, 85, 80],
+    "semantics": "four_s_state_gap_index",
+    "max": 100
+  },
+  "aesthetic_optimization": {
+    "summary": "整体美学基础扎实，骨相清晰、气质温婉知性，各分区协调度高。优化方向应聚焦于维持现有优势：强化眉眼与唇部的自然动态表达，提升中面部与下颌轮廓的光影层次，同时注重皮肤层的长期健康维护。避免过度干预，以「精修不改」为原则，突出个人辨识度与真实感。",
+    "directions": [
+      "通过妆造与光影技巧，强化眉眼区域的神采延续性，提升表情感染力",
+      "注重中面部与下颌交界处的线条连贯性管理，维持轮廓清晰度",
+      "结合日常护理习惯，稳定皮肤层状态，延缓光老化对表层质感的影响"
+    ]
+  },
+  "project_directions": ["肤质管理", "轮廓精致", "年轻态维护", "眉眼精致"],
+  "mapped_project_directions": [
+    {
+      "direction": "肤质管理",
+      "display_title": "肤质管理",
+      "safe_description": "围绕表层质感与屏障状态的日常维护方向",
+      "consult_note": "具体方案需到店面诊后由医师评估确定"
+    },
+    {
+      "direction": "轮廓精致",
+      "display_title": "轮廓精致",
+      "safe_description": "围绕下颌线与中面部光影层次的优化方向",
+      "consult_note": "具体方案需到店面诊后由医师评估确定"
+    }
+  ],
+  "disclaimer": "本报告由 AI 依据所提供影像生成，仅供美学参考，不构成任何医疗诊断或治疗建议。",
+  "lead_cta": {
+    "title": "领取你的专属 4S 美学方案",
+    "text": "填写信息后，专业顾问将结合你的 4S 报告，为你定制到店面诊路径与优化优先级建议。"
+  },
+  "optimization": "整体美学基础扎实，骨相清晰、气质温婉知性，各分区协调度高。建议聚焦维持现有优势：强化眉眼与唇部的自然动态表达，提升中面部与下颌轮廓的光影层次，同时注重皮肤层的长期健康维护。"
+}

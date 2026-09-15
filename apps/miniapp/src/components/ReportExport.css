@@ -1,0 +1,29 @@
+/* 导出按钮：与 H5 ReportExport 的 44px 高、22px 圆角、金色描边幽灵按钮一致。 */
+.rpx {
+  position: relative;
+  margin-top: 18px;
+}
+
+.rpx-btn {
+  height: 44px;
+  line-height: 44px;
+  border-radius: 22px;
+  background: #fff;
+  border: 1.5px solid var(--gold-light);
+  color: var(--gold-deep);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.rpx-btn[disabled] {
+  opacity: 0.6;
+  color: var(--gold-deep);
+}
+
+/* 离屏画布：canvas 是原生组件，隐藏只能靠移出可视区，display:none 会导致画不出内容。 */
+.rpx-canvas {
+  position: fixed;
+  left: -9999px;
+  top: 0;
+  z-index: -1;
+}

@@ -1,0 +1,23 @@
+# 每次发布前跑一次。name 包含 SHA，避免 Job 重名冲突
+# 部署时用 sed 替换 REPLACE_ME_SHA：
+#   sed "s/REPLACE_ME_SHA/$SHA/g" 40-migrate-job.yaml | kubectl apply -f -
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: migrate-REPLACE_ME_SHA
+  namespace: venus-prod
+spec:
+  backoffLimit: 1
+  ttlSecondsAfterFinished: 86400
+  template:
+    spec:
+      restartPolicy: Never
+      imagePullSecrets:
+        - name: acr-cred
+      containers:
+        - name: migrate
+          image: registry.cn-hangzhou.aliyuncs.com/venus/api:REPLACE_ME_SHA
+          command: ["alembic", "upgrade", "head"]
+          envFrom:
+            - secretRef:
+                name: api-secret

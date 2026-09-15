@@ -1,0 +1,50 @@
+# ==========================================================
+# 单机 k3s 一键部署配置（infra/k3s/deploy.sh 读取此文件）
+#
+# 使用方式：
+#   cp infra/k3s/deploy.conf.example infra/k3s/deploy.conf
+#   vim infra/k3s/deploy.conf     # 按注释填写
+#   sudo bash infra/k3s/deploy.sh
+#
+# 完整背景与原理见 docs/references/DEPLOY_K3S.md
+# ==========================================================
+
+# ---- 1. ACR 镜像仓库 ----
+# 从 [01-部署前准备.md §15 表 A] 或 ACR 控制台「访问凭证」获取
+ACR_REGISTRY="registry.cn-hangzhou.aliyuncs.com"
+ACR_REGISTRY_VPC="registry-vpc.cn-hangzhou.aliyuncs.com"   # VPC 内网地址，拉镜像走这个
+ACR_NAMESPACE="venus"
+ACR_USERNAME=""                                            # 例：ops@1234567890123456（@ 前是用户名，@ 后是阿里云 UID）
+ACR_PASSWORD=""                                            # ACR 固定密码
+
+# ---- 2. 业务镜像 tag（api / web / cron）----
+# 与 infra/build.sh --tag=... 保持一致
+IMAGE_TAG="v1.0.0"
+
+# ---- 3. 模型服务 ----
+LLM_IMAGE="${ACR_REGISTRY}/${ACR_NAMESPACE}/llm:v1.0.0"    # 完整镜像地址（自己构建的填 ACR，用现成的填 docker.io/... 或阿里云百炼等）
+LLM_PORT="8080"                                            # 模型服务监听端口
+LLM_HEALTH_PATH="/health"                                  # 健康检查路径（模型服务未实现的话改成 "/" 或 200 的路径）
+LLM_CPU_REQUEST="1000m"
+LLM_CPU_LIMIT="4000m"
+LLM_MEM_REQUEST="4Gi"
+LLM_MEM_LIMIT="8Gi"
+LLM_GPU_COUNT="0"                                          # 0=CPU 推理；1=需要 1 张 GPU（须先装 nvidia-container-toolkit + k3s GPU runtime）
+
+# ---- 4. 业务侧密钥文件 ----
+# 与 docs/02-部署实施.md §6 一致
+APP_ENV_FILE="/etc/venus-4s/.env"
+
+# ---- 5. 是否执行数据库迁移 ----
+# 首次部署或发布含新迁移时设 true，日常升级设 false
+RUN_MIGRATION="true"
+
+# ---- 6. Web Service 暴露方式 ----
+# nodeport: web 通过 ECS 30080/30443 端口对外（前面挂 SLB 或直接绑安全组）
+# skip:     不动 web Service，你自己后面配 Ingress
+WEB_EXPOSE="nodeport"
+WEB_NODEPORT_HTTP="30080"
+WEB_NODEPORT_HTTPS="30443"
+
+# ---- 7. 是否启用 NetworkPolicy 隔离 ----
+ENABLE_NETWORKPOLICY="true"

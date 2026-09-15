@@ -1,0 +1,12 @@
+# deps
+node_modules/
+
+# taro build output
+dist/
+
+# misc
+.DS_Store
+*.log
+.temp/
+.rn_temp/
+.swc/

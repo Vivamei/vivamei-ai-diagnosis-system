@@ -1,0 +1,30 @@
+.bh {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 4px;
+}
+
+.bh__left {
+  display: flex;
+  align-items: center;
+}
+
+.bh__left .brand-logo {
+  margin-right: 10px;
+  flex-shrink: 0;
+}
+
+.bh__name {
+  display: block;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.bh__sub {
+  display: block;
+  font-size: 9px;
+  color: var(--ink-soft);
+  letter-spacing: 3px;
+}

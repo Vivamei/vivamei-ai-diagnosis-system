@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: venus-prod
+
+resources:
+  - 00-namespace.yaml
+  - 01-configmap.yaml
+  - 10-api-deployment.yaml
+  - 11-api-service.yaml
+  - 12-api-hpa.yaml
+  - 20-web-deployment.yaml
+  - 21-web-service.yaml
+  - 30-cron-deployment.yaml
+  - 50-ingress.yaml
+
+# 部署时统一替换镜像 tag：
+#   kustomize edit set image \
+#       registry.cn-hangzhou.aliyuncs.com/venus/api=registry.cn-hangzhou.aliyuncs.com/venus/api:$SHA \
+#       registry.cn-hangzhou.aliyuncs.com/venus/web=registry.cn-hangzhou.aliyuncs.com/venus/web:$SHA
+#   kubectl apply -k .
+images:
+  - name: registry.cn-hangzhou.aliyuncs.com/venus/api
+    newTag: REPLACE_ME_SHA
+  - name: registry.cn-hangzhou.aliyuncs.com/venus/web
+    newTag: REPLACE_ME_SHA

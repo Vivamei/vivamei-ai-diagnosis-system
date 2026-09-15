@@ -1,0 +1,38 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: venus-mysql
+    ports: ["3306:3306"]
+    environment:
+      MYSQL_ROOT_PASSWORD: devroot
+      MYSQL_DATABASE: venus
+      MYSQL_USER: venus
+      MYSQL_PASSWORD: devpass
+    volumes:
+      - mysql-data:/var/lib/mysql
+    command: ["--default-authentication-plugin=mysql_native_password",
+              "--character-set-server=utf8mb4",
+              "--collation-server=utf8mb4_unicode_ci"]
+    healthcheck:
+      # 用 venus 账号走 TCP 连通才算 healthy：首次初始化阶段临时服务器只监听 socket，
+      # 这样能避免 mysqladmin ping 过早报 healthy、迁移抢在建账号之前跑而 1045。
+      test: ["CMD", "mysql", "-h", "127.0.0.1", "-uvenus", "-pdevpass", "-e", "SELECT 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+
+  redis:
+    image: redis:7-alpine
+    container_name: venus-redis
+    ports: ["6379:6379"]
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 10
+
+volumes:
+  mysql-data:
+  redis-data:

@@ -1,0 +1,138 @@
+/* 预约页，尺寸/圆角/渐变与 apps/web/src/pages/Booking.tsx 的内联样式逐项对齐。 */
+.bk-page {
+  min-height: 100vh;
+  padding: 20px 20px calc(24px + constant(safe-area-inset-bottom));
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+.bk-title {
+  margin-top: 18px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-align: center;
+  color: var(--ink);
+}
+
+.bk-sub {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.7;
+  text-align: center;
+  color: var(--ink-soft);
+}
+
+.bk-card {
+  margin-top: 18px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: var(--shadow-card);
+}
+
+.bk-label {
+  display: block;
+  margin-top: 14px;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: var(--ink-soft);
+}
+
+.bk-label:first-child {
+  margin-top: 0;
+}
+
+.bk-input {
+  height: 44px;
+  line-height: 44px;
+  padding: 0 14px;
+  border: 1px solid var(--gold-light);
+  border-radius: 12px;
+  font-size: 15px;
+  color: var(--ink);
+  background: #fff;
+  box-sizing: border-box;
+}
+
+.bk-row {
+  display: flex;
+  gap: 10px;
+}
+
+.bk-row__picker {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Picker 里塞的是 View，不是 Input，单独补一下省略与占位色 */
+.bk-picker {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.bk-picker--empty {
+  color: var(--ink-light);
+}
+
+.bk-err {
+  margin-top: 12px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--danger);
+}
+
+.bk-submit {
+  margin-top: 20px;
+  height: 48px;
+  line-height: 48px;
+  border-radius: 24px;
+  border: none;
+  font-size: 16px;
+  letter-spacing: 2px;
+  color: #fff;
+  background: linear-gradient(135deg, var(--gold), var(--rose));
+  box-shadow: var(--shadow-soft);
+}
+
+/* 表单未填全时 H5 是纯 --ink-light 底色，这里保持一致 */
+.bk-submit--off {
+  background: var(--ink-light);
+  box-shadow: none;
+}
+
+.bk-submit[disabled] {
+  color: #fff;
+}
+
+.bk-done {
+  margin-top: 60px;
+  text-align: center;
+}
+
+.bk-done__icon {
+  font-size: 60px;
+  line-height: 1;
+  color: var(--gold);
+}
+
+.bk-done__title {
+  margin-top: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.bk-done__btn {
+  display: inline-block;
+  margin-top: 22px;
+  padding: 10px 24px;
+  border-radius: 22px;
+  border: 1px solid var(--gold-light);
+  background: transparent;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--gold-deep);
+}

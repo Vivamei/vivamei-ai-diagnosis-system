@@ -1,0 +1,40 @@
+# 单台 ECS + 阿里云托管 RDS/KVStore 部署用 compose。
+# MySQL/Redis 走托管服务（不在本文件里起容器），只跑 web / api / cron 三个容器。
+# 用法见 docs/部署文档-阿里云ECS.md。
+#
+#   export API_IMAGE=registry.cn-hangzhou.aliyuncs.com/venus/api:<tag>
+#   export WEB_IMAGE=registry.cn-hangzhou.aliyuncs.com/venus/web:<tag>
+#   docker compose -f infra/docker-compose.ecs.yml pull
+#   docker compose -f infra/docker-compose.ecs.yml up -d
+
+services:
+  # 前端 = 自带 nginx 的静态站，同时做 TLS 终止 + /api 反向代理（edge.conf）
+  web:
+    image: ${WEB_IMAGE:?set WEB_IMAGE}
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/edge.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - api
+
+  api:
+    image: ${API_IMAGE:?set API_IMAGE}
+    restart: always
+    env_file: /etc/venus-4s/.env
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  cron:
+    image: ${API_IMAGE:?set API_IMAGE}
+    restart: always
+    command: ["python", "-m", "app.cron"]
+    env_file: /etc/venus-4s/.env

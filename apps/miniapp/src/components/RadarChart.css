@@ -1,0 +1,70 @@
+.rc-canvas {
+  display: block;
+  width: 100%;
+}
+
+.rc-hint {
+  text-align: center;
+  font-size: 11px;
+  color: #a89a86;
+  letter-spacing: 1px;
+  margin-top: 8px;
+}
+
+.rc-legend {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.rc-cell {
+  width: 50%;
+  box-sizing: border-box;
+  padding: 0 5px 10px;
+}
+
+.rc-cell__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: #f7f0e3;
+  border-radius: 12px;
+  border: 1px solid rgba(200, 163, 118, 0.15);
+}
+
+.rc-cell__left {
+  display: flex;
+  align-items: center;
+}
+
+.rc-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 4px;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.rc-name {
+  font-size: 13px;
+  color: #3a342c;
+}
+
+.rc-score {
+  font-size: 15px;
+  color: #3a342c;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.rc-cell__right {
+  display: flex;
+  align-items: center;
+}
+
+.rc-chev {
+  font-size: 15px;
+  color: #c8a376;
+  margin-left: 6px;
+}

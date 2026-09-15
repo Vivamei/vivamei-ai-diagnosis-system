@@ -1,0 +1,235 @@
+.rd-page {
+  padding: 16px 16px 32px;
+}
+
+.rd-back {
+  color: var(--ink-soft);
+  font-size: 13px;
+}
+
+.rd-title {
+  text-align: center;
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-top: 10px;
+}
+
+.rd-sub {
+  text-align: center;
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 2px;
+  margin: 4px 0 14px;
+}
+
+/* ---------- P4 大居中卡片 ---------- */
+
+.rd-card {
+  background: #1c1815;
+  border-radius: 22px;
+  padding: 28px 22px;
+  box-shadow: 0 14px 36px rgba(28, 24, 21, 0.28);
+  border: 1px solid rgba(200, 163, 118, 0.18);
+  color: #e6dcc9;
+}
+
+.rd-state {
+  text-align: center;
+  font-size: 13px;
+  color: rgba(240, 230, 213, 0.7);
+  padding: 8px 0;
+}
+
+.rd-state--err {
+  color: #e0a1a1;
+  line-height: 1.7;
+}
+
+.rd-badge__wrap {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.rd-badge {
+  width: 56px;
+  height: 56px;
+  line-height: 56px;
+  border-radius: 28px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: 1px;
+  /* 具体色值随维度变化，由页面用内联样式覆盖 background / borderColor / boxShadow */
+  border: 1px solid transparent;
+}
+
+.rd-label {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #f0e6d5;
+  letter-spacing: 1px;
+}
+
+.rd-score {
+  text-align: center;
+  font-size: 13px;
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+.rd-desc {
+  font-size: 13px;
+  line-height: 1.85;
+  color: #e6dcc9;
+  margin-top: 18px;
+  text-align: justify;
+}
+
+.rd-summary {
+  font-size: 13px;
+  line-height: 1.85;
+  color: rgba(240, 230, 213, 0.75);
+  margin-top: 12px;
+  text-align: justify;
+}
+
+/* ---------- 关键词 / 佐证 ---------- */
+
+.rd-tags {
+  margin-top: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.rd-tag {
+  padding: 4px 12px;
+  margin: 3px;
+  color: #e5d3b3;
+  border-radius: 14px;
+  font-size: 12px;
+  border: 1px solid transparent;
+}
+
+.rd-evidence {
+  margin-top: 18px;
+}
+
+.rd-evidence__li {
+  padding-left: 20px;
+  font-size: 12px;
+  line-height: 1.85;
+  color: rgba(240, 230, 213, 0.7);
+}
+
+/* ---------- 分区 / 分层明细 ---------- */
+
+.rd-items {
+  margin-top: 18px;
+}
+
+.rd-item {
+  padding: 12px;
+  background: rgba(200, 163, 118, 0.08);
+  border: 1px solid rgba(200, 163, 118, 0.2);
+  border-radius: 12px;
+}
+
+.rd-item + .rd-item {
+  margin-top: 12px;
+}
+
+.rd-item__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.rd-item__label {
+  font-weight: 700;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+
+/* 分层行里的标签在 flex 行内，靠 row 的 margin-bottom 控间距 */
+.rd-item__row .rd-item__label {
+  margin-bottom: 0;
+}
+
+.rd-item__score {
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.rd-item__desc {
+  font-size: 12px;
+  color: rgba(240, 230, 213, 0.8);
+  line-height: 1.7;
+}
+
+.rd-item__note {
+  margin-top: 6px;
+  font-size: 11px;
+  color: rgba(240, 230, 213, 0.55);
+  line-height: 1.7;
+}
+
+/* ---------- 二维码占位 ---------- */
+
+.rd-qr {
+  margin-top: 22px;
+  padding: 14px;
+  background: rgba(240, 230, 213, 0.06);
+  border: 1px dashed rgba(200, 163, 118, 0.3);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.rd-qr__box {
+  width: 60px;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  background: rgba(240, 230, 213, 0.1);
+  border-radius: 8px;
+  font-size: 10px;
+  color: rgba(240, 230, 213, 0.5);
+}
+
+.rd-qr__tip {
+  margin-top: 6px;
+  font-size: 11px;
+  color: rgba(240, 230, 213, 0.55);
+  letter-spacing: 1px;
+}
+
+/* ---------- CTA ---------- */
+
+.rd-cta {
+  margin-top: 20px;
+}
+
+.rd-cta__btn {
+  width: 100%;
+  height: 46px;
+  line-height: 46px;
+  border-radius: 24px;
+  border: none;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+  box-shadow: 0 10px 24px rgba(200, 163, 118, 0.36);
+}
+
+.rd-cta__btn::after {
+  border: none;
+}

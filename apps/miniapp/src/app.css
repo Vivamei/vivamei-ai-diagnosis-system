@@ -1,0 +1,182 @@
+/* design tokens，与 apps/web/src/styles/tokens.css 同源，改配色两边要一起改。 */
+page,
+.page {
+  --bg-warm: #fdfaf5;
+  --bg-soft: #f7ecdc;
+  --bg-rose: #fbf0ed;
+  --bg-card: #ffffff;
+  --gold: #c8a376;
+  --gold-light: #e8d5b3;
+  --gold-deep: #a8855a;
+  --rose: #e89788;
+  --rose-light: #f5d4cb;
+  --rose-deep: #d47a6a;
+  --ink: #3a342c;
+  --ink-soft: #8c7e6e;
+  --ink-light: #c5b9aa;
+  --success: #88b09a;
+  --warning: #e8b04f;
+  --danger: #d4675a;
+  --shadow-soft: 0 6px 20px rgba(168, 133, 90, 0.08);
+  --shadow-card: 0 10px 30px rgba(168, 133, 90, 0.1);
+  --shadow-elevated: 0 18px 44px rgba(168, 133, 90, 0.18);
+  --line: rgba(58, 52, 44, 0.06);
+}
+
+page {
+  /* 与 H5 的 body 同款双层弥散色晕：左上暖金、右下藕粉，纯色底会显得平且发灰。 */
+  background:
+    radial-gradient(ellipse at top left, #fbeee0 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, #fbe2d9 0%, transparent 50%),
+    var(--bg-warm);
+  color: var(--ink);
+  font-family: -apple-system, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+  font-size: 14px;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 20px 20px calc(24px + constant(safe-area-inset-bottom));
+  padding-bottom: calc(24px + env(safe-area-inset-bottom));
+  box-sizing: border-box;
+}
+
+.brand-title {
+  font-size: 22px;
+  letter-spacing: 4px;
+  color: var(--ink);
+  text-align: center;
+}
+
+.brand-sub {
+  font-size: 10px;
+  letter-spacing: 3px;
+  color: var(--gold-deep);
+  text-align: center;
+  margin-top: 6px;
+}
+
+.card {
+  background: var(--bg-card);
+  border-radius: 16px;
+  padding: 18px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--line);
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-deep) 100%);
+  color: #fff;
+  border-radius: 26px;
+  height: 48px;
+  line-height: 48px;
+  font-size: 16px;
+  letter-spacing: 2px;
+  text-align: center;
+  border: none;
+  box-shadow: var(--shadow-soft);
+}
+
+.btn-primary[disabled] {
+  opacity: 0.5;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-soft);
+  border: 1px solid var(--gold-light);
+  border-radius: 26px;
+  height: 44px;
+  line-height: 44px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.disclaimer {
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--ink-light);
+  text-align: center;
+}
+
+/* 以下关键帧与 apps/web/src/styles/tokens.css 逐字对齐。
+   放在 app.css 而不是各页面的 css 里，是因为小程序只有 app.css 是全局的，
+   页面级 css 定义的 animation 名字在其它页面引用不到。 */
+
+/* 流式输出时跟在文字末尾的光标 ▌ */
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* 进度条当前节点的金色呼吸光晕 */
+@keyframes pulseGold {
+  0% {
+    box-shadow: 0 0 0 0 rgba(200, 163, 118, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(200, 163, 118, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(200, 163, 118, 0);
+  }
+}
+
+/* 骨架屏的高光扫过 */
+@keyframes shimmer {
+  0% {
+    background-position: -240px 0;
+  }
+  100% {
+    background-position: 240px 0;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 进度条已激活连接线上的流动条纹，配合 24px 的 background-size 使用 */
+@keyframes flowLine {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 24px 0;
+  }
+}
+
+.skeleton-line {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    rgba(200, 163, 118, 0.08) 0%,
+    rgba(200, 163, 118, 0.22) 50%,
+    rgba(200, 163, 118, 0.08) 100%
+  );
+  background-size: 240px 100%;
+  animation: shimmer 1.4s linear infinite;
+}

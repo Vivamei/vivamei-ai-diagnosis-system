@@ -1,0 +1,135 @@
+/* 从原型 4S诊断版-原型demo.html 抽取的 design tokens。 */
+:root {
+  --bg-warm: #fdfaf5;
+  --bg-soft: #f7ecdc;
+  --bg-rose: #fbf0ed;
+  --bg-card: #ffffff;
+  --gold: #c8a376;
+  --gold-light: #e8d5b3;
+  --gold-deep: #a8855a;
+  --rose: #e89788;
+  --rose-light: #f5d4cb;
+  --rose-deep: #d47a6a;
+  --ink: #3a342c;
+  --ink-soft: #8c7e6e;
+  --ink-light: #c5b9aa;
+  --success: #88b09a;
+  --warning: #e8b04f;
+  --danger: #d4675a;
+  --shadow-soft: 0 6px 20px rgba(168, 133, 90, 0.08);
+  --shadow-card: 0 10px 30px rgba(168, 133, 90, 0.1);
+  --shadow-elevated: 0 18px 44px rgba(168, 133, 90, 0.18);
+  --line: rgba(58, 52, 44, 0.06);
+
+  --safe-top: env(safe-area-inset-top, 0);
+  --safe-bottom: env(safe-area-inset-bottom, 0);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: -apple-system, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", sans-serif;
+  background:
+    radial-gradient(ellipse at top left, #fbeee0 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, #fbe2d9 0%, transparent 50%),
+    var(--bg-warm);
+  color: var(--ink);
+  min-height: 100vh;
+}
+
+#root {
+  max-width: 420px;
+  margin: 0 auto;
+  min-height: 100vh;
+  position: relative;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  color: var(--ink-soft);
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes pulseGold {
+  0% {
+    box-shadow: 0 0 0 0 rgba(200, 163, 118, 0.55);
+  }
+  70% {
+    box-shadow: 0 0 0 12px rgba(200, 163, 118, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(200, 163, 118, 0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -240px 0;
+  }
+  100% {
+    background-position: 240px 0;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes flowLine {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 24px 0;
+  }
+}
+
+.skeleton-line {
+  height: 12px;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    rgba(200, 163, 118, 0.08) 0%,
+    rgba(200, 163, 118, 0.22) 50%,
+    rgba(200, 163, 118, 0.08) 100%
+  );
+  background-size: 240px 100%;
+  animation: shimmer 1.4s linear infinite;
+}

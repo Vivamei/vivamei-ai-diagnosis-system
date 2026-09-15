@@ -1,0 +1,55 @@
+# Node
+**/node_modules
+**/dist
+**/.vite
+**/*.tsbuildinfo
+**/playwright-report
+**/test-results
+
+# Python
+**/__pycache__
+**/*.py[cod]
+**/.venv
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+**/htmlcov
+**/.coverage
+
+# Env & secrets
+**/.env
+**/.env.*
+!**/.env.example
+# 例外：apps/web/.env.production 由 scripts/gen-frontend-env.mjs 从 config/frontend.env 生成，
+# 只含 VITE_ 公开前端配置（域名 / 文案），且 Vite 必须在构建期读到它，故必须进构建上下文。
+# 真凭据一律不写这里（见 config/frontend.env 顶部说明）。
+!apps/web/.env.production
+config/dev.env
+infra/nginx/ssl/*
+!infra/nginx/ssl/.gitkeep
+
+# Node (Taro)
+**/.swc
+
+# Docs / assets not needed in image
+_local/
+docs/
+logs/
+problem/
+apps/api/logs/
+apps/api/var/
+*.zip
+*.docx
+*.png
+*.jpg
+*.json
+!apps/web/**/*.json
+!apps/api/**/*.json
+*.md
+*.bat
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

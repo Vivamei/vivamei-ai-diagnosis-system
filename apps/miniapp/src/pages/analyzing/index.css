@@ -1,0 +1,212 @@
+.an-page {
+  padding: 16px 16px 32px;
+}
+
+.an-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px 0 6px;
+}
+
+.an-spinner {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(200, 163, 118, 0.25);
+  border-top-color: #c8a376;
+  animation: an-spin 0.9s linear infinite;
+  margin-right: 10px;
+}
+
+@keyframes an-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.an-title {
+  font-size: 17px;
+  color: var(--ink);
+  font-weight: 700;
+}
+
+.an-sub {
+  text-align: center;
+  font-size: 11px;
+  color: var(--ink-soft);
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.an-wait {
+  background: #1c1815;
+  border-radius: 20px;
+  padding: 18px;
+  margin-bottom: 16px;
+  border: 1px solid rgba(200, 163, 118, 0.18);
+  box-shadow: 0 12px 32px rgba(28, 24, 21, 0.24);
+}
+
+.an-wait__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.an-wait__hint {
+  font-size: 13px;
+  color: #e6dcc9;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.an-wait__pct {
+  font-size: 12px;
+  color: #c8a376;
+  font-weight: 700;
+}
+
+.an-bar {
+  height: 8px;
+  border-radius: 6px;
+  background: rgba(240, 230, 213, 0.1);
+  overflow: hidden;
+}
+
+.an-bar__fill {
+  height: 100%;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+  transition: width 0.9s ease;
+}
+
+.an-wait__foot {
+  margin-top: 10px;
+  font-size: 11px;
+  color: var(--ink-soft);
+  display: flex;
+  justify-content: space-between;
+}
+
+.an-list {
+  margin-top: 16px;
+}
+
+.an-card {
+  background: #1c1815;
+  padding: 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(200, 163, 118, 0.18);
+  color: #e6dcc9;
+  margin-bottom: 12px;
+  opacity: 1;
+  box-shadow: 0 12px 32px rgba(28, 24, 21, 0.24);
+  transition: opacity 0.4s ease, transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.an-card--idle {
+  opacity: 0.55;
+}
+
+/* 正在生成的那张卡：金色描边 + 外扩光晕，并微微放大，把注意力钉在当前维度上 */
+.an-card--streaming {
+  box-shadow:
+    0 0 0 1px rgba(200, 163, 118, 0.5),
+    0 14px 36px rgba(200, 163, 118, 0.25);
+  transform: scale(1.01);
+}
+
+.an-card__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.an-card__name {
+  font-size: 13px;
+  color: #c8a376;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.an-card__state {
+  font-size: 11px;
+  color: rgba(240, 230, 213, 0.4);
+  font-weight: 500;
+}
+
+.an-card__state--streaming {
+  color: #c8a376;
+}
+
+.an-card__state--done {
+  color: #88b09a;
+}
+
+/* 骨架屏三条，间距 8px；条本身的流光样式复用 app.css 的 .skeleton-line */
+.an-skels .skeleton-line + .skeleton-line {
+  margin-top: 8px;
+}
+
+.an-err {
+  margin-top: 24px;
+  background: #1c1815;
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid rgba(214, 110, 90, 0.4);
+  box-shadow: 0 12px 32px rgba(28, 24, 21, 0.24);
+  text-align: center;
+}
+
+.an-err__title {
+  font-size: 17px;
+  color: var(--danger);
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.an-err__msg {
+  font-size: 13px;
+  color: #e6dcc9;
+  margin-bottom: 6px;
+  line-height: 1.6;
+}
+
+.an-err__code {
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-bottom: 18px;
+  word-break: break-all;
+}
+
+.an-err__actions {
+  display: flex;
+  justify-content: center;
+}
+
+.an-err__btn {
+  height: 36px;
+  line-height: 36px;
+  padding: 0 20px;
+  border-radius: 14px;
+  font-size: 13px;
+  background: linear-gradient(135deg, var(--gold), var(--gold-deep));
+  color: #1c1815;
+  font-weight: 700;
+  border: none;
+  margin: 0 5px;
+}
+
+.an-err__btn--ghost {
+  background: none;
+  border: 1px solid rgba(200, 163, 118, 0.4);
+  color: #c8a376;
+  font-weight: 400;
+}
+
+.an-err__btn::after {
+  border: none;
+}
