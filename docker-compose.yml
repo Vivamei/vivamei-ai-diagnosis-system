@@ -1,0 +1,45 @@
+services:
+  redis:
+    image: registry.openanolis.cn/openanolis/redis:5.0.3-8.6
+    restart: always
+#    command: redis-server --protected-mode no
+    command: redis-server --protected-mode no --appendonly yes --maxmemory 4gb --maxmemory-policy noeviction
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  vivamei-redis-api:
+    build: .
+    restart: always
+    ports:
+      - "8001:8000"
+    env_file:
+      - .env
+    depends_on:
+      redis:
+        condition: service_healthy
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 4
+    volumes:
+      - ./logs:/app/logs
+      - ./uploads:/app/uploads
+
+  vivamei-redis-worker:
+    build: .
+    restart: always
+    env_file:
+      - .env
+    depends_on:
+      redis:
+        condition: service_healthy
+#    command: celery -A tasks.celery_app.celery_app worker --loglevel=INFO --concurrency=10
+    command: celery -A tasks.celery_app.celery_app worker --loglevel=INFO --concurrency=10 --max-tasks-per-child=100
+    volumes:
+      - ./logs:/app/logs
+      - ./uploads:/app/uploads
+
+volumes:
+  redis-data:
